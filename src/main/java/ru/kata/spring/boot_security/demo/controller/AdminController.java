@@ -24,6 +24,10 @@ public class AdminController {
         this.roleService = roleService;
     }
 
+    @GetMapping("/test")
+    public String redirectToTestPage() {
+        return "test";
+    }
     @GetMapping("/index")
     public String redirectToIndex() {
         return "index";
