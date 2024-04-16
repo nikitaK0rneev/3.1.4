@@ -1,18 +1,62 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+>
 <head>
     <title>Spring Security Example</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-<h1>User, welcome spring boot security page!</h1>
-<div>
-    <p>Name: <span th:text="${user.name}">Name</span></p>
-    <p>Age: <span th:text="${user.age}">Age</span></p>
-</div>
-<form th:action="@{/logout}" method="get">
-    <input type="submit" value="Log out"/>
-</form>
+<nav class="navbar navbar-dark bg-dark">
+    <!-- Navbar content -->
+    <div class="navbar-brand" th:text="${user.name + ' with roles: ' + user.getRolesAsSring()}"></div>
+    <form class="form-inline ml-auto" th:action="@{/logout}" method="get">
+        <button class="btn btn-outline-light" type="submit">Logout</button>
+    </form>
+</nav>
 
+<div class="container-fluid vh-100">
+    <div class="row vh-100">
+        <!-- Боковая панель -->
+        <div class="col-md-1 d-none d-md-block sidebar">
+            <div th:if="${user.getRolesAsSring().contains('ADMIN')}">
+                <a href="/admin" class="btn btn-link btn-block active sidebar-button">Admin</a>
+            </div>
+            <a href="/user" class="btn btn-primary btn-block sidebar-button">User</a>
+        </div>
+
+        <!-- Основной контент -->
+        <div class="col-md-11 bg-light">
+            <h1>User info</h1>
+
+            <div class="card">
+                <div class="card-header">
+                    About user
+                </div>
+                <div class="card-body">
+
+
+            <table class="table table-striped bg-white">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>age</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.age}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

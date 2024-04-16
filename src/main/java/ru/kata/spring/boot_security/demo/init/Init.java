@@ -25,22 +25,23 @@ public class Init {
     @PostConstruct
     private void postConstruct() {
         Role adminRole = new Role("ADMIN");
+        Role userRole = new Role("USER");
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(adminRole);
+        adminRoles.add(userRole);
 
         roleService.save(adminRole);
 
-        Role userRole = new Role("USER");
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
 
         roleService.save(userRole);
 
-        User admin = new User("admin1", 22, "admin", adminRoles);
+        User admin = new User("admin", 22, "admin", adminRoles);
 
         userService.createUser(admin);
 
-        User user = new User("user1", 33, "user", userRoles);
+        User user = new User("user", 33, "user", userRoles);
 
         userService.createUser(user);
     }

@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Add user</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
 
 <form th:method="POST" th:action="@{/admin}" th:object="${user}">
+    <div class="form-group">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
+    </div>
     <br/>
     <label for="age">Enter age: </label>
     <input type="number" th:field="*{age}" id="age"/>
